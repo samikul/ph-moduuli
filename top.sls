@@ -7,3 +7,5 @@ base:
     - public_html
     - postgresql
     - flask
+    - public_wsgi
+    - usepublicdirs

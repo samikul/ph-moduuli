@@ -6,7 +6,23 @@ libapache2-mod-wsgi-py3:
 
 /etc/apache2/sites-available/wsgi.conf:
   file.managed:
-    - source: salt://public_wsgi
+    - source: salt://public_wsgi/wsgi.conf
 
 'a2ensite wsgi.conf; a2dissite 000-default.conf':
-  cmd.run
+  cmd.run:
+    - watch:
+      - file: /etc/apache2/sites-available/wsgi.conf
+
+/home/admuser/public_wsgi/test.wsgi:
+  file.managed:
+    - source: salt://public_wsgi/test.wsgi
+
+/home/admuser/public_wsgi/helloworld.py:
+  file.managed:
+    - source: salt://public_wsgi/helloworld.py
+
+apache2.service:
+  service.running:
+    - name: apache2
+    - watch:
+      - file: /etc/apache2/sites-available/wsgi.conf

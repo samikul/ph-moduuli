@@ -1,13 +1,13 @@
 postgresql:
   pkg.installed
 
-'createuser devuser; createdb devuser':
+'createuser admuser; createdb admuser':
   cmd.run:
     - runas: postgres
-    - unless: 'psql -c "\du" | grep devuser'
+    - unless: 'psql -c "\du" | grep admuser'
 
 postgresql.service:
   service.running:
     - name: postgresql
     - watch:
-      - cmd: 'createuser devuser; createdb devuser'
+      - cmd: 'createuser admuser; createdb admuser'

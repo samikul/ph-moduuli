@@ -10,7 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 db = SQLAlchemy(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///devuser'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///admuser'
 
 def sql(rawSql, sqlVars={}):
  "Execute raw sql, optionally with prepared query"
