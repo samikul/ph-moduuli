@@ -1,5 +1,5 @@
 base:
-  'sami-minion':
+  'minion':
     - helloworld
     - ufw
     - apache2

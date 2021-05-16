@@ -9,7 +9,7 @@ a2enmod userdir:
  cmd.run:
    - creates: /etc/apache2/mods-enabled/userdir.conf
 
-apache2.service:
+apache2restart:
   service.running:
     - name: apache2
     - watch:

@@ -21,7 +21,7 @@ libapache2-mod-wsgi-py3:
   file.managed:
     - source: salt://public_wsgi/helloworld.py
 
-apache2.service:
+apache2restartwsgi:
   service.running:
     - name: apache2
     - watch:
