@@ -13,10 +13,50 @@ Salt-moduuli, joka konfiguroi palvelimen valmiiksi Flask web-applikaatoiden test
 ├── ufw
 └── usepublicdirs
 ```
+```
+/srv/salt/
+├── apache2
+│   ├── index.html
+│   └── init.sls
+├── flask
+│   ├── hellodatabase.py
+│   ├── helloflask.py
+│   └── init.sls
+├── helloworld
+│   ├── helloworld.txt
+│   └── init.sls
+├── postgresql
+│   └── init.sls
+├── public_html
+│   ├── index.html
+│   └── init.sls
+├── public_wsgi
+│   ├── helloworld.py
+│   ├── init.sls
+│   ├── test.wsgi
+│   └── wsgi.conf
+├── tools
+│   └── init.sls
+├── top.sls
+├── ufw
+│   └── init.sls
+└── usepublicdirs
+    ├── init.sls
+    └── usepublicdirs
+```
 
 ## Vaatimukset
 
 Moduuli vaatii Salt-Stackin asennuksen ja käyttöönoton. Käyttöönottoapua saa esimerkiksi [](https://docs.saltproject.io/en/latest/topics/tutorials/walkthrough.html) (Salt Stack, 2021) tai [Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux](https://terokarvinen.com//2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/index.html?fromSearch=) (Tero Karvinen, 2018).
+
+Moduulissa minionia kutsutaan `moduuliminion`. Vaihda nimi `top.sls` tiedostossa toiseen mikäli et käytä samaa nimeä.
+
+Moduulissa luodaan testiympäristö käyttäjälle `sami`. Vaihda nimen `sami` tilalle unix-käyttäjäsi nimi tiedostoissa:
+- `/postgresql/init.sls`
+- `/flask/hellodatabase.py`
+- `/public_wsgi/init.sls`
+- `/public_wsgi/test.wsgi`
+- `/public_wsgi/wsgi.conf`
 
 ## Raportti
 
