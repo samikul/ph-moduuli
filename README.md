@@ -1,5 +1,20 @@
-# ph-moduuli
-Salt-moduuli, joka konfiguroi palvelimen valmiiksi Flask web-applikaatoiden testikehittämiseen ja tuotantokelpoiseen julkaisuun.
+# Sami Kulonpää
+
+Visit my website [kulonpaa.com](https://kulonpaa.com/).
+
+## Palvelimen konfigurointi Saltin avulla Flask testikehittämiseen ja tuotantokelpoiseen julkaisuun
+
+Repossa on Haaga-Helia Ammattikorkeakoulun Palvelinten Hallinta - ICT4TN022-3011 opintojakson kurssityö, jonka tarkoituksena on rakentaa oma keskitettyyn hallintaan tarkoitettu moduuli. Tarkempi tehtävänanto löytyy [kurssisivuilta](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h7-oma-moduli). 
+
+Moduuli:
+- asentaa Apache2 palvelinohjelman, vaihtaa sen oletussivun ja luo käyttäjäkohtaisen kotisivun
+- asentaa palomuurin konfigurointiin tarkoitetun ohjelman, käynnistää sen ja avaa portin SSH-yhteydelle
+- asentaa Flaskin ja testaa sen toimivuuden testiympäristössä
+- asentaa mod_wsgi:n ja julkaisee tuotantokelpoisen web-applikaation
+- asentaa PostgreSQL:n, luo tietokantakäyttäjän sekä tietokannan
+  - testaa tietokannan toimivuuden hyödyntäen SQL-Alchemyä Flask-testiympäristössä
+- asentaa kehitystyössä hyödyllisiä ohjelmia, kuten `curl`, `git`, ja `wget`
+- lisää skriptin `usepublicdirs`, joka lisää käyttäjähakemistoihin kehitystyöhön vaaditut hakemistot.
 
 ```
 /srv/salt/
@@ -13,37 +28,7 @@ Salt-moduuli, joka konfiguroi palvelimen valmiiksi Flask web-applikaatoiden test
 ├── ufw
 └── usepublicdirs
 ```
-```
-/srv/salt/
-├── apache2
-│   ├── index.html
-│   └── init.sls
-├── flask
-│   ├── hellodatabase.py
-│   ├── helloflask.py
-│   └── init.sls
-├── helloworld
-│   ├── helloworld.txt
-│   └── init.sls
-├── postgresql
-│   └── init.sls
-├── public_html
-│   ├── index.html
-│   └── init.sls
-├── public_wsgi
-│   ├── helloworld.py
-│   ├── init.sls
-│   ├── test.wsgi
-│   └── wsgi.conf
-├── tools
-│   └── init.sls
-├── top.sls
-├── ufw
-│   └── init.sls
-└── usepublicdirs
-    ├── init.sls
-    └── usepublicdirs
-```
+Tätä dokumenttia saa kopioida ja muokata [GNU General Public License (versio 3)](https://www.gnu.org/licenses/gpl-3.0.html) mukaisesti.
 
 ## Vaatimukset
 
