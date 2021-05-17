@@ -9,4 +9,4 @@ app = Flask(__name__)
 
 @app.route("/")
 def helloworld():
-	return "Visit my website kulonpaa.com!\n"
+	return "Flask production style web-app is up and running!\n\nVisit my website kulonpaa.com!\n"

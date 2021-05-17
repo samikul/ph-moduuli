@@ -4,6 +4,9 @@ libapache2-mod-wsgi-py3:
 /etc/skel/public_wsgi:
   file.directory
 
+/home/sami/public_wsgi:
+  file.directory
+
 /etc/apache2/sites-available/wsgi.conf:
   file.managed:
     - source: salt://public_wsgi/wsgi.conf
@@ -13,11 +16,11 @@ libapache2-mod-wsgi-py3:
     - watch:
       - file: /etc/apache2/sites-available/wsgi.conf
 
-/home/admuser/public_wsgi/test.wsgi:
+/home/sami/public_wsgi/test.wsgi:
   file.managed:
     - source: salt://public_wsgi/test.wsgi
 
-/home/admuser/public_wsgi/helloworld.py:
+/home/sami/public_wsgi/helloworld.py:
   file.managed:
     - source: salt://public_wsgi/helloworld.py
 
