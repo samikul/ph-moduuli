@@ -1,11 +1,27 @@
 # ph-moduuli
-Salt-moduuli, joka konfiguroi palvelimen valmiiksi Flask web-applikaatoiden testikehittämiseen
+Salt-moduuli, joka konfiguroi palvelimen valmiiksi Flask web-applikaatoiden testikehittämiseen ja tuotantokelpoiseen julkaisuun.
 
-https://github.com/samikul/PalvelintenHallinta-ICT4TN022-3011/wiki/h7
+/srv/salt/
+├── apache2
+├── flask
+├── helloworld
+├── postgresql
+├── public_html
+├── public_wsgi
+├── tools
+├── ufw
+└── usepublicdirs
 
-## Käyttöönotto
 
-### Salt-arkkitehtuurin käyttöönotto
+## Vaatimukset
+
+Moduuli vaatii Salt-Stackin asennuksen ja käyttöönoton. Käyttöönottoapua saa esimerkiksi [](https://docs.saltproject.io/en/latest/topics/tutorials/walkthrough.html) (Salt Stack, 2021) tai [Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux](https://terokarvinen.com//2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/index.html?fromSearch=) (Tero Karvinen, 2018).
+
+## Raportti
+
+Moduulin luonti on raportoitu [täällä](https://github.com/samikul/PalvelintenHallinta-ICT4TN022-3011/wiki/h7).
+
+## Salt-minionin käyttöönotto
 
 Luo yhteys palvelimelle
 ```
@@ -93,5 +109,15 @@ $ curl localhost
 
 ![kuva](https://user-images.githubusercontent.com/58463139/118478037-14250280-b718-11eb-9532-d3b819814ac6.png)
 
+Testaa tietokannan toimivuus.
+Käynnistä tietokantaa testaava applikaatio
+```
+$ python3 /tmp/hellodatabase.py
+```
+Avaa toinen terminal-ikkuna, luo palvelimelle ssh-yhteys ja testaa tietokantojen toimivuus.
+```
+$ ssh sami@xx.xxx.xx.xxx
+$ curl localhost:5000
+```
 
-[Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux](https://terokarvinen.com//2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/index.html?fromSearch=) (Tero Karvinen, 2018).
+![kuva](https://user-images.githubusercontent.com/58463139/118479041-39664080-b719-11eb-8835-bac0679e6740.png)
