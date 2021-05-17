@@ -2,7 +2,7 @@
 
 Visit my website [kulonpaa.com](https://kulonpaa.com/).
 
-## Palvelimen konfigurointi Saltin avulla Flask testikehittämiseen ja tuotantokelpoiseen julkaisuun
+## Palvelimen konfigurointi Saltin avulla Flask testikehitykseen ja tuotantokelpoiseen julkaisuun
 
 Tämä on Haaga-Helia Ammattikorkeakoulun Palvelinten Hallinta - ICT4TN022-3011 opintojakson kurssityö, jonka tarkoituksena on rakentaa oma keskitettyyn hallintaan tarkoitettu moduuli. Tarkempi tehtävänanto löytyy [kurssisivuilta](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h7-oma-moduli). Opintojakson opettaja on [Tero Karvinen](https://terokarvinen.com/).
 
@@ -22,7 +22,7 @@ Moduulini:
 ### Lisenssi
 Tätä dokumenttia saa kopioida ja muokata [GNU General Public License (versio 3)](https://www.gnu.org/licenses/gpl-3.0.html) mukaisesti.
 
-### Hakemistopuu
+### Moduulin hakemistopuu
 ```
 /srv/salt/
 ├── apache2
