@@ -1,6 +1,7 @@
 # ph-moduuli
 Salt-moduuli, joka konfiguroi palvelimen valmiiksi Flask web-applikaatoiden testikehittämiseen ja tuotantokelpoiseen julkaisuun.
 
+```
 /srv/salt/
 ├── apache2
 ├── flask
@@ -11,7 +12,7 @@ Salt-moduuli, joka konfiguroi palvelimen valmiiksi Flask web-applikaatoiden test
 ├── tools
 ├── ufw
 └── usepublicdirs
-
+```
 
 ## Vaatimukset
 
