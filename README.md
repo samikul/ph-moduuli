@@ -36,19 +36,35 @@ Tätä dokumenttia saa kopioida ja muokata [GNU General Public License (versio 3
 ## Raportti
 Moduulin työstämisen eri vaiheet on raportoitu [tänne](https://github.com/samikul/PalvelintenHallinta-ICT4TN022-3011/wiki/h7).
 
-## Vaatimukset
+## Vaatimukset ja käyttöönotto
 Moduuli vaatii Salt-Stackin asennuksen ja käyttöönoton. Käyttöönottoapua saa esimerkiksi [Salt in 10 minutes](https://docs.saltproject.io/en/latest/topics/tutorials/walkthrough.html) (Salt Stack, 2021) ja [Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux](https://terokarvinen.com//2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/index.html?fromSearch=) (Tero Karvinen, 2018).
 ### Vaihe 1.
 Asenna ja ota käyttöön Salt-arkkitehtuuri.
-### Vaihe 2.
-Moduulissa minionia kutsutaan `moduuliminion`. Vaihda nimi `top.sls` tiedostossa toiseen mikäli et käytä samaa nimeä.
+#### Vaihe 2.
+Kloonaa tämä varasto, luo Saltille hakemisto ja kopioi moduuli
+```
+$ sudo mkdir /srv/salt
+$ sudo cp -r ph-moduuli/* /srv/salt/
+```
 ### Vaihe 3.
+Moduulissa minionia kutsutaan `moduuliminion`. Vaihda nimi `top.sls` tiedostossa toiseen mikäli et käytä samaa nimeä.
+### Vaihe 4.
 Moduulissa luodaan testiympäristö käyttäjälle `sami`. Vaihda nimen `sami` tilalle unix-käyttäjäsi nimi tiedostoissa:
 - `/postgresql/init.sls`
 - `/flask/hellodatabase.py`
 - `/public_wsgi/init.sls`
 - `/public_wsgi/test.wsgi`
 - `/public_wsgi/wsgi.conf`
+### Vaihe 5.
+Ota moduuli käyttöön ja aloita kehitystyö
+```
+$ sudo salt moduuliminion state.highstate
+```
+
+
+## Testaus
+
+Opintojakson lopputyön vuoksi raportoin oman asennuksen, moduulin käyttöönoton ja 
 
 ## Salt master
 Asenna master
