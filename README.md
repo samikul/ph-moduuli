@@ -4,7 +4,7 @@ Visit my website [kulonpaa.com](https://kulonpaa.com/).
 
 ## Palvelimen konfigurointi Saltin avulla Flask testikehittämiseen ja tuotantokelpoiseen julkaisuun
 
-Repossa on Haaga-Helia Ammattikorkeakoulun Palvelinten Hallinta - ICT4TN022-3011 opintojakson kurssityö, jonka tarkoituksena on rakentaa oma keskitettyyn hallintaan tarkoitettu moduuli. Tarkempi tehtävänanto löytyy [kurssisivuilta](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h7-oma-moduli). Opintojakson opettaja on [Tero Karvinen](https://terokarvinen.com/).
+Tämä on Haaga-Helia Ammattikorkeakoulun Palvelinten Hallinta - ICT4TN022-3011 opintojakson kurssityö, jonka tarkoituksena on rakentaa oma keskitettyyn hallintaan tarkoitettu moduuli. Tarkempi tehtävänanto löytyy [kurssisivuilta](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h7-oma-moduli). Opintojakson opettaja on [Tero Karvinen](https://terokarvinen.com/).
 
 ### Moduuli-info
 Moduulini:
@@ -16,6 +16,11 @@ Moduulini:
   - testaa tietokannan toimivuuden hyödyntäen SQL-Alchemyä Flask-testiympäristössä
 - asentaa kehitystyössä hyödyllisiä ohjelmia, kuten `curl`, `git`, ja `wget`
 - lisää skriptin `usepublicdirs`, joka lisää käyttäjähakemistoihin kehitystyöhön vaaditut hakemistot ja tiedostot.
+
+![kuva](https://user-images.githubusercontent.com/58463139/118494957-5d328200-b72b-11eb-9447-3ef0ec8ba523.png)
+
+### Lisenssi
+Tätä dokumenttia saa kopioida ja muokata [GNU General Public License (versio 3)](https://www.gnu.org/licenses/gpl-3.0.html) mukaisesti.
 
 ### Hakemistopuu
 ```
@@ -30,8 +35,6 @@ Moduulini:
 ├── ufw
 └── usepublicdirs
 ```
-### Lisenssi
-Tätä dokumenttia saa kopioida ja muokata [GNU General Public License (versio 3)](https://www.gnu.org/licenses/gpl-3.0.html) mukaisesti.
 
 ## Raportti
 Moduulin työstämisen eri vaiheet on raportoitu [tänne](https://github.com/samikul/PalvelintenHallinta-ICT4TN022-3011/wiki/h7). Muut kurssin aikana työstämäni raportit ja viikkotehtävät löytyvät [täältä](https://github.com/samikul/PalvelintenHallinta-ICT4TN022-3011/wiki). Edeltävän opintojakson [Linux Palvelimet](https://terokarvinen.com/2020/linux-palvelimet-2021-alkukevat-kurssi-ict4tn021-3014/) aikana kirjoittamani raportit löytyvät [täältä](https://github.com/samikul/LinuxPalvelimet-ICT4TN021-3014/wiki).
@@ -43,7 +46,7 @@ Moduuli vaatii Salt-Stackin asennuksen ja käyttöönoton. Käyttöönottoapua s
 Asenna ja ota käyttöön Salt-arkkitehtuuri.
 
 #### Vaihe 2.
-Kloonaa tämä varasto, luo Saltille hakemisto ja kopioi moduuli
+Masterin järjestelmässä kloonaa tämä varasto, luo Saltille hakemisto ja kopioi moduuli
 ```
 $ git clone https://github.com/samikul/ph-moduuli.git
 $ sudo mkdir /srv/salt
@@ -62,20 +65,25 @@ Moduulissa luodaan testiympäristö käyttäjälle `sami`. Vaihda nimen `sami` t
 - `/public_wsgi/wsgi.conf`
 
 ### Vaihe 5.
-Ota moduuli käyttöön ja aloita kehitystyö!
+Ota moduuli käyttöön.
 ```
 $ sudo salt moduuliminion state.highstate
 ```
 
+### Vaihe 6.
+Aja minionilla käyttäjähakemistot lisäävän skriptin ja aloita kehitystyö!
+```
+$ usepublicdirs
+```
 
 ___
 
 
 
-## Testaus
+## Moduulin käyttöönotto
 Opintojakson lopputyön vuoksi raportoin oman asennuksen, moduulin käyttöönoton ja tuotantovalmiin applikaation testaamisen sekä tietokantojen toimivuuden varmistamisen.
 
-## Salt master
+### Salt master
 Asensin masterin
 ```
 $ apt-get update
@@ -94,7 +102,7 @@ Potkaisin masterin käyntiin
 ```
 $ sudo systemctl restart salt-master.service
 ```
-## Salt-minion
+### Salt-minion
 Loin yhteyden palvelimelle
 ```
 $ ssh root@xx.xxx.xx.xxx
@@ -174,14 +182,46 @@ $ usepublicdirs
 '/etc/skel/public_html' -> '/home/sami/public_html'
 '/etc/skel/public_html/index.html' -> '/home/sami/public_html/index.html'
 ```
-Testasin tuotanto-Flask-webappin toimivuuden
+
+### Testaus
+
+Testasin masterina arkkitehtuurin toimivuuden
+```salt
+sami@master:~$ sudo salt moduuliminion state.apply helloworld
+moduuliminion:
+----------
+          ID: /tmp/helloworld.txt
+    Function: file.managed
+      Result: True
+     Comment: File /tmp/helloworld.txt is in the correct state
+     Started: 13:01:44.541985
+    Duration: 30.597 ms
+     Changes:   
+
+Summary for moduuliminion
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time:  30.597 ms
+```
+
+Testasin palomuurin toiminnan
+```
+$ sudo ufw verbose
+```
+
+![kuva](https://user-images.githubusercontent.com/58463139/118492567-cebd0100-b728-11eb-9df2-8735c7db5010.png)
+
+Testasin tuotanto-Flask-webappin toimivuuden ja `curl` apuohjelman asentumisen
 ```
 $ curl localhost
 ```
 
-![kuva](https://user-images.githubusercontent.com/58463139/118478037-14250280-b718-11eb-9532-d3b819814ac6.png)
+![kuva](https://user-images.githubusercontent.com/58463139/118494957-5d328200-b72b-11eb-9447-3ef0ec8ba523.png)
 
-Testasin tietokannan toimivuuden käynnistämällä tietokanta-applikaation
+Testasin tietokannan ja SQL-Alchemyn toimivuuden käynnistämällä tietokantaa testaavan applikaation
 ```
 $ python3 /tmp/hellodatabase.py
 ```
