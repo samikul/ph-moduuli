@@ -4,9 +4,10 @@ Visit my website [kulonpaa.com](https://kulonpaa.com/).
 
 ## Palvelimen konfigurointi Saltin avulla Flask testikehittämiseen ja tuotantokelpoiseen julkaisuun
 
-Repossa on Haaga-Helia Ammattikorkeakoulun Palvelinten Hallinta - ICT4TN022-3011 opintojakson kurssityö, jonka tarkoituksena on rakentaa oma keskitettyyn hallintaan tarkoitettu moduuli. Tarkempi tehtävänanto löytyy [kurssisivuilta](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h7-oma-moduli). 
+Repossa on Haaga-Helia Ammattikorkeakoulun Palvelinten Hallinta - ICT4TN022-3011 opintojakson kurssityö, jonka tarkoituksena on rakentaa oma keskitettyyn hallintaan tarkoitettu moduuli. Tarkempi tehtävänanto löytyy [kurssisivuilta](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h7-oma-moduli). Tarkempi raportointi moduulin eri työvaiheista löytyy [täältä](https://github.com/samikul/PalvelintenHallinta-ICT4TN022-3011/wiki/h7). Muut kurssin aikana työstämäni raportit ja viikkotehtävät löytyvät [täältä](https://github.com/samikul/PalvelintenHallinta-ICT4TN022-3011/wiki).
 
-Moduuli:
+### Moduuli-info
+Moduulini:
 - asentaa Apache2 palvelinohjelman, vaihtaa sen oletussivun ja luo käyttäjäkohtaisen kotisivun
 - asentaa palomuurin konfigurointiin tarkoitetun ohjelman, käynnistää sen ja avaa portin SSH-yhteydelle
 - asentaa Flaskin ja testaa sen toimivuuden testiympäristössä
@@ -16,6 +17,7 @@ Moduuli:
 - asentaa kehitystyössä hyödyllisiä ohjelmia, kuten `curl`, `git`, ja `wget`
 - lisää skriptin `usepublicdirs`, joka lisää käyttäjähakemistoihin kehitystyöhön vaaditut hakemistot.
 
+### Hakemistopuu
 ```
 /srv/salt/
 ├── apache2
@@ -28,14 +30,19 @@ Moduuli:
 ├── ufw
 └── usepublicdirs
 ```
+### Lisenssi
 Tätä dokumenttia saa kopioida ja muokata [GNU General Public License (versio 3)](https://www.gnu.org/licenses/gpl-3.0.html) mukaisesti.
 
+## Raportti
+Moduulin työstämisen eri vaiheet on raportoitu [tänne](https://github.com/samikul/PalvelintenHallinta-ICT4TN022-3011/wiki/h7).
+
 ## Vaatimukset
-
-Moduuli vaatii Salt-Stackin asennuksen ja käyttöönoton. Käyttöönottoapua saa esimerkiksi [](https://docs.saltproject.io/en/latest/topics/tutorials/walkthrough.html) (Salt Stack, 2021) tai [Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux](https://terokarvinen.com//2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/index.html?fromSearch=) (Tero Karvinen, 2018).
-
+Moduuli vaatii Salt-Stackin asennuksen ja käyttöönoton. Käyttöönottoapua saa esimerkiksi [Salt in 10 minutes](https://docs.saltproject.io/en/latest/topics/tutorials/walkthrough.html) (Salt Stack, 2021) ja [Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux](https://terokarvinen.com//2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/index.html?fromSearch=) (Tero Karvinen, 2018).
+### Vaihe 1.
+Asenna ja ota käyttöön Salt-arkkitehtuuri.
+### Vaihe 2.
 Moduulissa minionia kutsutaan `moduuliminion`. Vaihda nimi `top.sls` tiedostossa toiseen mikäli et käytä samaa nimeä.
-
+### Vaihe 3.
 Moduulissa luodaan testiympäristö käyttäjälle `sami`. Vaihda nimen `sami` tilalle unix-käyttäjäsi nimi tiedostoissa:
 - `/postgresql/init.sls`
 - `/flask/hellodatabase.py`
@@ -43,12 +50,26 @@ Moduulissa luodaan testiympäristö käyttäjälle `sami`. Vaihda nimen `sami` t
 - `/public_wsgi/test.wsgi`
 - `/public_wsgi/wsgi.conf`
 
-## Raportti
-
-Moduulin luonti on raportoitu [täällä](https://github.com/samikul/PalvelintenHallinta-ICT4TN022-3011/wiki/h7).
-
-## Salt-minionin käyttöönotto
-
+## Salt master
+Asenna master
+```
+$ apt-get update
+$ apt-get -y install salt-master
+```
+Pidennä yhteyden aikakatkaisua esim. 300 sekuntiin (5min)
+```
+- sudoedit /etc/salt/master
+...
+# Set the default timeout for the salt command and api. The default is 5
+# seconds.
+timeout: 300
+...
+```
+Potkaise master käyntiin
+```
+$ sudo systemctl restart salt-master.service
+```
+## Salt-minion
 Luo yhteys palvelimelle
 ```
 $ ssh root@xx.xxx.xx.xxx
@@ -57,11 +78,11 @@ $ ssh root@xx.xxx.xx.xxx
 root@devdroplet:~# apt-get update
 root@devdroplet:~# apt-get install -y salt-minion
 ```
-Lisää masterin osoite ja nimeä minion
+Lisää masterin IP-osoite ja nimeä minion
 ```
 root@devdroplet:~# nano /etc/salt/minion
 ...
-master: 159.89.9.104
+master: xxx.xx.x.xxx
 id: moduuliminion
 ...
 ```
@@ -73,7 +94,7 @@ Käynnistä master uudelleen
 ```
 $ sudo systemctl restart salt-master.service
 ```
-Tarkista, että master löytää minionin ja hyväksy se
+Tarkista, että master löytää minionin avaimen ja hyväksy yhteys masterin ja minionin välille
 ```
 $ sudo salt-key
 $ sudo salt-key -a moduuliminion
