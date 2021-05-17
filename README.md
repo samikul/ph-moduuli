@@ -34,10 +34,10 @@ Moduulini:
 Tätä dokumenttia saa kopioida ja muokata [GNU General Public License (versio 3)](https://www.gnu.org/licenses/gpl-3.0.html) mukaisesti.
 
 ## Raportti
-Moduulin työstämisen eri vaiheet on raportoitu [tänne](https://github.com/samikul/PalvelintenHallinta-ICT4TN022-3011/wiki/h7). Muut kurssin aikana työstämäni raportit ja viikkotehtävät löytyvät [täältä](https://github.com/samikul/PalvelintenHallinta-ICT4TN022-3011/wiki). [Täältä](https://github.com/samikul/LinuxPalvelimet-ICT4TN021-3014/wiki), löytyy raportit, jotka kirjoitin tätä opintojaksoa edeltävällä [Linux Palvelimet](https://terokarvinen.com/2020/linux-palvelimet-2021-alkukevat-kurssi-ict4tn021-3014/) -opintojaksolla.
+Moduulin työstämisen eri vaiheet on raportoitu [tänne](https://github.com/samikul/PalvelintenHallinta-ICT4TN022-3011/wiki/h7). Muut kurssin aikana työstämäni raportit ja viikkotehtävät löytyvät [täältä](https://github.com/samikul/PalvelintenHallinta-ICT4TN022-3011/wiki). Edeltävän opintojakson [Linux Palvelimet](https://terokarvinen.com/2020/linux-palvelimet-2021-alkukevat-kurssi-ict4tn021-3014/) aikana kirjoittamani raportit löytyvät [täältä](https://github.com/samikul/LinuxPalvelimet-ICT4TN021-3014/wiki).
 
 ## Vaatimukset ja käyttöönotto
-Moduuli vaatii Salt-Stackin asennuksen ja käyttöönoton. Käyttöönottoapua saa esimerkiksi [Salt in 10 minutes](https://docs.saltproject.io/en/latest/topics/tutorials/walkthrough.html) (Salt Stack, 2021) ja [Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux](https://terokarvinen.com//2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/index.html?fromSearch=) (Tero Karvinen, 2018).
+Moduuli vaatii Salt-Stackin asennuksen ja käyttöönoton. Käyttöönottoapua saa esimerkiksi [Salt in 10 minutes](https://docs.saltproject.io/en/latest/topics/tutorials/walkthrough.html) (Salt Stack, 2021) tai [Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux](https://terokarvinen.com//2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/index.html?fromSearch=) (Tero Karvinen, 2018).
 
 #### Vaihe 1.
 Asenna ja ota käyttöön Salt-arkkitehtuuri.
@@ -66,7 +66,11 @@ Ota moduuli käyttöön ja aloita kehitystyö!
 ```
 $ sudo salt moduuliminion state.highstate
 ```
+
+
 ___
+
+
 
 ## Testaus
 Opintojakson lopputyön vuoksi raportoin oman asennuksen, moduulin käyttöönoton ja tuotantovalmiin applikaation testaamisen sekä tietokantojen toimivuuden varmistamisen.
@@ -134,7 +138,7 @@ root@devdroplet:~# exit
 ```
 Kirjauduin sisään uudella käyttäjällä
 ```
-$ ssh sami@46.101.197.127
+$ ssh sami@xx.xx.xxx.xxx
 ```
 Lukitsin juurikäyttäjän ja estin sillä sisäänkirjautumisen
 ```
