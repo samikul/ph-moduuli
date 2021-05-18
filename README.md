@@ -245,6 +245,8 @@ $ curl localhost:5000
 ![kuva](https://user-images.githubusercontent.com/58463139/118667475-b7e7de80-b7fc-11eb-8513-019dded7fa94.png)
 
 ---
-Edit. 18.5:
+Palautuksen jälkeen tapahtunutta:
+muokattu 18.5
 - kirjoitusvirheiden korjaamista
 - `helloflask.py` ohjelman testaus
+- moduuli luo hakemiston `/etc/skel/public_wsgi/`
