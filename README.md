@@ -20,7 +20,7 @@ Moduulini:
 ![kuva](https://user-images.githubusercontent.com/58463139/118494957-5d328200-b72b-11eb-9447-3ef0ec8ba523.png)
 
 ### Lisenssi
-Tätä dokumenttia saa kopioida ja muokata [GNU General Public License (versio 3)](https://www.gnu.org/licenses/gpl-3.0.html) mukaisesti.
+Tätä materiaalia saa kopioida ja muokata [GNU General Public License (versio 3)](https://www.gnu.org/licenses/gpl-3.0.html) mukaisesti.
 
 ### Moduulin hakemistopuu
 ```
@@ -50,7 +50,7 @@ Masterin järjestelmässä kloonaa tämä varasto, luo Saltille hakemisto ja kop
 ```
 $ git clone https://github.com/samikul/ph-moduuli.git
 $ sudo mkdir /srv/salt
-$ sudo cp -r ph-moduuli/* /srv/salt/
+$ sudo cp -r /ph-moduuli/* /srv/salt/
 ```
 
 ### Vaihe 3.
@@ -98,7 +98,7 @@ Pidensin yhteyden aikakatkaisua 300 sekuntiin (5min)
 timeout: 300
 ...
 ```
-Potkaisin masterin käyntiin
+Käynnistin masterin uudelleen
 ```
 $ sudo systemctl restart salt-master.service
 ```
@@ -111,7 +111,7 @@ $ ssh root@xx.xxx.xx.xxx
 root@devdroplet:~# apt-get update
 root@devdroplet:~# apt-get install -y salt-minion
 ```
-Lisäsin masterin IP-osoitteen ja nimesin minion
+Lisäsin masterin IP-osoitteen ja nimesin minionin
 ```
 root@devdroplet:~# nano /etc/salt/minion
 ...
@@ -119,7 +119,7 @@ master: xxx.xx.x.xxx
 id: moduuliminion
 ...
 ```
-Käynnistin minion uudelleen
+Käynnistin minionin uudelleen
 ```
 root@devdroplet:~# systemctl restart salt-minion.service
 ```
@@ -127,7 +127,7 @@ Käynnistin masterin uudelleen
 ```
 $ sudo systemctl restart salt-master.service
 ```
-Tarkistin, että master löysin minionin avaimen ja hyväksyin yhteyden masterin ja minionin välille
+Tarkistin, että master löysin minionin avaimen ja hyväksyin (`--accept`) yhteyden masterin ja minionin välille
 ```
 $ sudo salt-key
 $ sudo salt-key -a moduuliminion
@@ -207,14 +207,14 @@ Total states run:     1
 Total run time:  30.597 ms
 ```
 
-Testasin palomuurin toiminnan
+Testasin palomuurin toiminnan ja sen, että portti 22 on auki
 ```
 $ sudo ufw verbose
 ```
 
 ![kuva](https://user-images.githubusercontent.com/58463139/118492567-cebd0100-b728-11eb-9df2-8735c7db5010.png)
 
-Testasin tuotanto-Flask-webappin toimivuuden ja `curl` apuohjelman asentumisen
+Testasin tuotantoon tarkoitetun Flask-webappin toimivuuden ja `curl` apuohjelman asentumisen
 ```
 $ curl localhost
 ```
@@ -232,3 +232,19 @@ $ curl localhost:5000
 ```
 
 ![kuva](https://user-images.githubusercontent.com/58463139/118479041-39664080-b719-11eb-8835-bac0679e6740.png)
+
+Testasin testiympäristöön tarkoitetun Flask-webappin toimivuuden. Keskeytin edellisen ohjelman <kbd>CTRL</kbd>+<kbd>C</kbd>. Toisessa terminaali-ikkunassa ajoin ohjelman
+```
+$ python3 /tmp/helloflask.py
+```
+Toisessa ikkunassa testasin ohjelman toimivuuden
+```
+$ curl localhost:5000
+```
+
+![kuva](https://user-images.githubusercontent.com/58463139/118667475-b7e7de80-b7fc-11eb-8513-019dded7fa94.png)
+
+---
+Edit. 18.5:
+- kirjoitusvirheiden korjaamista
+- `helloflask.py` ohjelman testaus
