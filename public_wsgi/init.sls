@@ -5,7 +5,8 @@ libapache2-mod-wsgi-py3:
   file.directory
 
 /home/sami/public_wsgi:
-  file.directory
+  file.directory:
+    - mode: "0755"
 
 /etc/apache2/sites-available/wsgi.conf:
   file.managed:
@@ -21,6 +22,14 @@ libapache2-mod-wsgi-py3:
     - source: salt://public_wsgi/test.wsgi
 
 /home/sami/public_wsgi/helloworld.py:
+  file.managed:
+    - source: salt://public_wsgi/helloworld.py
+
+/etc/skel/public_wsgi/test.wsgi:
+  file.managed:
+    - source: salt://public_wsgi/test.wsgi
+
+/etc/skel/public_wsgi/helloworld.py:
   file.managed:
     - source: salt://public_wsgi/helloworld.py
 

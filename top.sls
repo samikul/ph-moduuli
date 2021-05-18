@@ -1,5 +1,5 @@
 base:
-  'moduuliminion':
+  'moduuliminion*':
     - helloworld
     - ufw
     - apache2
